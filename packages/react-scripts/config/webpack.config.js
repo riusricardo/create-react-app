@@ -369,6 +369,7 @@ module.exports = function(webpackEnv) {
                     'babel-preset-react-app',
                     'react-dev-utils',
                     'react-scripts',
+                    'truffle-react-scripts',
                   ]
                 ),
                 // @remove-on-eject-end
@@ -421,6 +422,7 @@ module.exports = function(webpackEnv) {
                     'babel-preset-react-app',
                     'react-dev-utils',
                     'react-scripts',
+                    'truffle-react-scripts',
                   ]
                 ),
                 // @remove-on-eject-end
@@ -635,8 +637,8 @@ module.exports = function(webpackEnv) {
             '!**/*.json',
             '!**/__tests__/**',
             '!**/?(*.)(spec|test).*',
-            '!**/src/setupProxy.*',
-            '!**/src/setupTests.*',
+            '!**/client/src/setupProxy.*',
+            '!**/client/src/setupTests.*',
           ],
           watch: paths.appSrc,
           silent: true,
