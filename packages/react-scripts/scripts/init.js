@@ -53,7 +53,7 @@ function tryGitInit(appPath) {
     didInit = true;
 
     execSync('git add -A', { stdio: 'ignore' });
-    execSync('git commit -m "Initial commit from Create React App"', {
+    execSync('git commit -m "Initial commit from Truffle React dApp"', {
       stdio: 'ignore',
     });
     return true;
@@ -88,17 +88,19 @@ module.exports = function(
   const appPackage = require(path.join(appPath, 'package.json'));
   const useYarn = fs.existsSync(path.join(appPath, 'yarn.lock'));
 
-  // Copy over some of the devDependencies
+  // Copy over some of the dependencies
   appPackage.dependencies = appPackage.dependencies || {};
+  appPackage.devDependencies = appPackage.devDependencies || {};
 
   const useTypeScript = appPackage.dependencies['typescript'] != null;
 
   // Setup the script rules
   appPackage.scripts = {
-    start: 'react-scripts start',
-    build: 'react-scripts build',
-    test: 'react-scripts test',
-    eject: 'react-scripts eject',
+    'start': 'truffle-react-scripts start',
+    'build': 'truffle-react-scripts build',
+    'test': 'truffle-react-scripts test',
+    'eject': 'truffle-react-scripts eject',
+    'restore-symlink': 'node utils/scripts/fixSymlink.js'
   };
 
   // Setup the eslint config
@@ -178,14 +180,11 @@ module.exports = function(
         return `${key}@${templateDependencies[key]}`;
       })
     );
-    fs.unlinkSync(templateDependenciesPath);
   }
 
-  // Install react and react-dom for backward compatibility with old CRA cli
-  // which doesn't install react and react-dom along with react-scripts
-  // or template is presetend (via --internal-testing-template)
   if (!isReactInstalled(appPackage) || template) {
-    console.log(`Installing react and react-dom using ${command}...`);
+    console.log();
+    console.log(`Installing template dependencies using ${command}...`);
     console.log();
 
     const proc = spawn.sync(command, args, { stdio: 'inherit' });
@@ -197,6 +196,37 @@ module.exports = function(
 
   if (useTypeScript) {
     verifyTypeScriptSetup();
+  }
+
+  // Install additional template devDependencies, if present
+  if (useYarn) {
+    command = 'yarnpkg';
+    args = ['add', '--dev'];
+  } else {
+    command = 'npm';
+    args = ['install', '--save-dev', verbose && '--verbose'].filter(e => e);
+  }
+
+  if (fs.existsSync(templateDependenciesPath)) {
+    const templateDevDependencies = require(templateDependenciesPath).devDependencies;
+    args = args.concat(
+      Object.keys(templateDevDependencies).map(key => {
+        return `${key}@${templateDevDependencies[key]}`;
+      })
+    );
+    fs.unlinkSync(templateDependenciesPath);
+  }
+
+  if (!isReactInstalled(appPackage) || template) {
+    console.log();
+    console.log(`Installing template devDependencies using ${command}...`);
+    console.log();
+
+    const proc = spawn.sync(command, args, { stdio: 'inherit' });
+    if (proc.status !== 0) {
+      console.error(`\`${command} ${args.join(' ')}\` failed`);
+      return;
+    }
   }
 
   if (tryGitInit(appPath)) {
@@ -227,7 +257,7 @@ module.exports = function(
   console.log(
     chalk.cyan(`  ${displayedCommand} ${useYarn ? '' : 'run '}build`)
   );
-  console.log('    Bundles the app into static files for production.');
+  console.log('    Bundles the dApp into static files for production.');
   console.log();
   console.log(chalk.cyan(`  ${displayedCommand} test`));
   console.log('    Starts the test runner.');
@@ -255,14 +285,16 @@ module.exports = function(
     );
   }
   console.log();
-  console.log('Happy hacking!');
+  console.log('Happy Ethereum hacking!');
 };
 
 function isReactInstalled(appPackage) {
   const dependencies = appPackage.dependencies || {};
+  const devDependencies = appPackage.devDependencies || {};
 
   return (
     typeof dependencies.react !== 'undefined' &&
-    typeof dependencies['react-dom'] !== 'undefined'
+    typeof dependencies['react-dom'] !== 'undefined' &&
+    (Object.keys(dependencies).length > 3 || Object.keys(devDependencies).length > 0 )
   );
 }
