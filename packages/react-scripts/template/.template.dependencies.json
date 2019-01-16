@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "truffle-contract": "4.0.0-next.0",
+    "web3": "^1.0.0-beta.37"
+  },
+  "devDependencies": {
+    "ganache-cli": "^6.2.5"
+  }
+}

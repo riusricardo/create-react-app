@@ -1,26 +1,35 @@
 {
-  "name": "react-scripts",
-  "version": "2.1.2",
-  "description": "Configuration and scripts for Create React App.",
-  "repository": "facebook/create-react-app",
+  "name": "truffle-react-scripts",
+  "version": "0.3.1",
+  "description": "Configuration scripts for Create React dApps.",
+  "repository": "riusricardo/truffle-react-scripts",
   "license": "MIT",
   "engines": {
     "node": ">=6"
   },
   "bugs": {
-    "url": "https://github.com/facebook/create-react-app/issues"
+    "url": "https://github.com/riusricardo/truffle-react-scripts/issues"
   },
+  "keywords": [
+    "truffle-react-scripts",
+    "create-react-app",
+    "react-scripts",
+    "react",
+    "truffle",
+    "dapp",
+    "smart-contract",
+    "ethereum"
+  ],
   "files": [
     "bin",
     "config",
-    "lib",
     "scripts",
     "template",
     "template-typescript",
     "utils"
   ],
   "bin": {
-    "react-scripts": "./bin/react-scripts.js"
+    "truffle-react-scripts": "./bin/truffle-react-scripts.js"
   },
   "types": "./lib/react-app.d.ts",
   "dependencies": {
@@ -78,6 +87,9 @@
   },
   "optionalDependencies": {
     "fsevents": "1.2.4"
+  },
+  "scripts": {
+    "postinstall": "node ./scripts/utils/postInstallSymlink.js"
   },
   "browserslist": [
     ">0.2%",
