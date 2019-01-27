@@ -1,9 +1,10 @@
 'use strict'
-
+const path = require("path");
 const ganacheRPC = require('ganache-cli');
 let provider;
 
 module.exports = {
+  contracts_build_directory: path.join(__dirname, "client/src/contracts"),
   compilers: {
     solc: {
       version: "0.5.2",

@@ -55,13 +55,16 @@ This package includes scripts and configuration used by [Create React App]
     
     Ganache tests:
     ```
-    truffle test --network ganache
+    >$ truffle test --network ganache
     ```
     Local development:
     ```
-    truffle compile
-    truffle migrate --network local_dev
-    truffle test --network local_dev
+    >$ truffle compile
+    >$ truffle migrate --network local_dev
+    ```
+    Local tests:
+    ```
+    >$ truffle test --network local_dev
     ```
     In order to work with the second configuration, you need to have a running development blockchain.
 
@@ -72,15 +75,11 @@ This package includes scripts and configuration used by [Create React App]
     
     Eg-2:
     ```
-    >$ geth --networkid=1337 --rpc --rpcport=9545 --rpcaddr=localhost  --rpccorsdomain=\"*\" --port=30303 --nodiscover --maxpeers=0 --ws --wsport=9546 --wsaddr=localhost --wsorigins=\"*\" --mine --minerthreads=1 --etherbase=0xABDCEFABCDEFABCDEFABCDEFABCDEFABCDEFABCD --shh --rpcapi=eth,web3,net,debug,shh,personal --wsapi=eth,web3,net,shh,debug,personal --dev --dev.period=3
+    >$ geth --networkid=1337 --rpc --rpcport=9545 --rpcaddr=localhost  --rpccorsdomain="*" --port=30303 --nodiscover --maxpeers=0 --ws --wsport=9546 --wsaddr=localhost --wsorigins="*" --mine --minerthreads=1 --etherbase=0xABDCEFABCDEFABCDEFABCDEFABCDEFABCDEFABCD --shh --rpcapi=eth,web3,net,debug,shh,personal --wsapi=eth,web3,net,shh,debug,personal --dev --dev.period=3
     ```
     NOTE: Change the <0xABDCEFABCDEFABCDEFABCDEFABCDEFABCDEFABCD> address to your local testing account to receive the Ethereum mining rewards.
 
     It's as easy as modifying the config file! [Check the documentation on adding network configurations](http://truffleframework.com/docs/advanced/configuration#networks). Depending on the port you're using, you'll also need to update line 29 of `src/utils/getWeb3.js`.
-
-* __Why is there both a truffle.js file and a truffle-config.js file?__
-
-    `truffle-config.js` is a copy of `truffle.js` for compatibility with Windows development environments. Feel free to it if it's irrelevant to your platform.  
 
 
 ```    
@@ -92,20 +91,20 @@ my-dapp/
   truffle-config.js
   node_modules/
   build/
-    contracts/
-      Migrations.json
     client/
   client/
     public/
       index.html
       favicon.png
+      manifest.json
     src/
       App.css
       App.js
       App.test.js
       index.css
       index.js
-      [SymLink]../../build/contracts/
+      contracts/
+        Migrations.json
       util/
         getWeb3.js
   contracts/
@@ -114,9 +113,6 @@ my-dapp/
   migrations/
     1_initial_migration.js
     2_deploy_contracts.js
-  utils/
-    scripts/
-      fixSymlink.js
   test/
     simplestorage.js
     TestSimpleStorage.sol

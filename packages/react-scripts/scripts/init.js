@@ -99,8 +99,7 @@ module.exports = function(
     'start': 'truffle-react-scripts start',
     'build': 'truffle-react-scripts build',
     'test': 'truffle-react-scripts test',
-    'eject': 'truffle-react-scripts eject',
-    'restore-symlink': 'node utils/scripts/fixSymlink.js'
+    'eject': 'truffle-react-scripts eject'
   };
 
   // Setup the eslint config

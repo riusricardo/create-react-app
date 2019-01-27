@@ -1,5 +1,5 @@
 import Web3 from "web3";
- 
+
 const getWeb3 = () =>
   new Promise((resolve, reject) => {
     // Wait for loading completion to avoid race conditions with web3 injection timing.
@@ -23,7 +23,7 @@ const getWeb3 = () =>
         console.log("Injected web3 detected.");
         resolve(web3);
       }
-      // Fallback to localhost;
+      // Fallback to localhost; use dev console port by default...
       else {
         const provider = new Web3.providers.HttpProvider(
           "http://127.0.0.1:9545"
@@ -34,5 +34,5 @@ const getWeb3 = () =>
       }
     });
   });
- 
+
 export default getWeb3;

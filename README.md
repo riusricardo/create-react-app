@@ -1,4 +1,37 @@
-# Create React App [![Build Status](https://travis-ci.org/facebook/create-react-app.svg?branch=master)](https://travis-ci.org/facebook/create-react-app) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-green.svg)](https://github.com/facebook/create-react-app/pulls)
+# truffle-react-scripts
+[![npm](https://img.shields.io/npm/v/truffle-react-scripts.svg)](https://www.npmjs.com/package/truffle-react-scripts)
+[![npm](https://img.shields.io/npm/dm/truffle-react-scripts.svg)](https://www.npmjs.com/package/truffle-react-scripts)
+
+This package includes scripts and configuration used by [Create React App]
+
+## Installation
+
+1. Install Create-React-App and Truffle globally.
+    ```sh
+    npm install -g create-react-app
+    npm install -g truffle
+    ```
+2. Create a new dApp.
+    ```sh
+    create-react-app my-dapp --scripts-version truffle-react-scripts
+    ```
+3. Run the development console.
+    ```sh
+    truffle develop
+    ```
+4. Compile and migrate the smart contracts. Note inside the development console we don't preface commands with `truffle`.
+    ```javascript
+    compile
+    migrate
+    ```
+5. Run the webpack server for front-end hot reloading (outside the development console). Smart contract changes must be manually recompiled and migrated.
+    ```sh
+    // Serves the front-end on http://localhost:3000
+    npm run start
+    ```
+
+
+## Create React App [![Build Status](https://travis-ci.org/facebook/create-react-app.svg?branch=master)](https://travis-ci.org/facebook/create-react-app) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-green.svg)](https://github.com/facebook/create-react-app/pulls)
 
 Create React apps with no build configuration.
 
