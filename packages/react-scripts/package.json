@@ -1,6 +1,6 @@
 {
   "name": "truffle-react-scripts",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Configuration scripts for Create React dApps.",
   "repository": "riusricardo/truffle-react-scripts",
   "license": "MIT",
